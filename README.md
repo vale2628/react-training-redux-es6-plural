@@ -1,1 +1,1 @@
-# React Redux training for Building Applications with React and Redux in ES6
+Pluralsight Building Applications with React and Redux in ES6
