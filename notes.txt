@@ -1,0 +1,53 @@
+- Reducers are pure functions that takes state and action as an input and return a new State.
+- Store and it is immutable and there is only 1.
+- Actions describes a user intent and trigger changes.
+- Actions
+  - have a type property that describes the action
+  - the rest can be anything else
+  -
+- Reducers
+  - there is an app reducer defined. This main reducers takes all the actions that comes in then calls the appropriate reducer for the action.
+  - The reducer takes state and action and returns a new state. (like a meat grinder )
+  - Reducers must be a pure function.
+   - You know if you have one when the same arguments always return the same values
+    - Forbidden in Reducers
+      - Mutate arguments
+      - Perform side effects (Perform API Calls / routing transitions )
+      - Call non-pure functions (Date.now() or Math.Random())
+
+- Store
+  - It is updated once the reducer returns the new state via React-Redux
+
+- Redux Flow
+  1. A user makes an action. An action is created with its type and data.
+  2. A reducers receive the current state as an action and returns the new state.
+  3. Once the new state is returned, any component that is using the data is re-rendered.
+
+Immutability
+- You cannot change existing objects instead you must return a new object.
+- Javascript primitives are immutable already!
+- Reasons
+  - Clarity
+    - Every state change happens in a reducer so you know exatcly what changed the state.
+  - Performance
+    - Because it is immutable, Redux knows to notify react of state changes by simply doing a reference  check (prevStoreState !== storeState) instead of doing the expensive operation of checkng every property in the object for a difference.
+  - Awesome Sauce (Amazing debugging)
+    - time travel debugging
+- How do I enforce immutability? (options) *** could cause bug if a state is mutated.
+  - Trust (no enforcement)
+  - Redux-immutable-state-invariant
+    - it is a safety net
+    - it displays a warning if an object is changed.
+    - it does alot of object copying and degrades performance if enable in production, so only use in dev.
+  - immutable.js library
+    - programmatically enforces it
+    - create immutable data-structures
+    - "there is a lot going on" - training person
+
+
+
+***BUG***
+when you click refresh on one of the courses after updating it. It sets the state back to where it was instead of reloading with the updated state.
+
+
+
