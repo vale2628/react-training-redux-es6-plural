@@ -44,10 +44,37 @@ Immutability
     - create immutable data-structures
     - "there is a lot going on" - training person
 
+Spread operator gives us the ability to be expanded anywhere multiple arguments are allowed:
+- multiple arguments for function calls
+- multiple elements for array literals (we used it copy arrays in our reducers)
+- multple variables for destructing assignment.
+
+A reducer is just a function that receives a state and an action and returns a new state.
+
+- Container components (connects to the store)
+ - Parts of containers
+  - Constructor. Initialize state and bind functions
+  - Child functions. Called by render
+  - Render functions. It is recommended to  keep the mark up separate and should be called by a child component.
+ -  Prop types. For validations
+ -  Redux connect and related functions.  Maps for StateToProps and DispatchToProps
+
 
 
 ***BUG***
 when you click refresh on one of the courses after updating it. It sets the state back to where it was instead of reloading with the updated state.
 
+**TESTING**
+Two Goals
+1. Test Markup - Markup belongs in presentation components so the only reference to a container component should be child components
+2. Test Behavior - Given a click, scroll, drag, change... what happens? do we get expected behavior.
 
+To Test a container component (they dont return a component since they are wrapped in a call to connect):
+ 1. Wrap with <Provider>  to create/mock your own store in the test.
+ 2. Add a named export for the component so that it is able to be called.
 
+Shallow - renders the child component 1 level deep.
+Mount - renders all child components (Slower)
+
+If you need to test mapStateToProps - Consider extracting the complicated pieces into seperate selectors (pure functions - easy to test)
+ - also consider using Reselect if the function is expensive to run.
