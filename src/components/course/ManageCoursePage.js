@@ -21,7 +21,7 @@ class ManageCoursePage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.course.id != nextProps.course.id){
+    if(this.props.course.id !== nextProps.course.id){
       //Necessary to populate form when existing course is loaded directly
       this.setState({course: Object.assign({}, nextProps.course)});
     }
@@ -37,7 +37,11 @@ class ManageCoursePage extends React.Component {
     event.preventDefault();
     this.setState({saving: true});
     this.props.actions.saveCourse(this.state.course)
-      .then(() => this.redirect());
+      .then(() => this.redirect())
+      .catch(error => {
+        toastr.error(error);
+        this.setState({saving: false });
+      });
   }
 
   redirect() {
@@ -72,7 +76,7 @@ ManageCoursePage.contextTypes = {
 };
 
 function getCourseById(courses, id) {
-  const course = courses.filter(course => course.id == id);
+  const course = courses.filter(course => course.id === id);
   if(course.length) return course[0]; //since filter returns an array, have to grab the first.
   return null;
 }
